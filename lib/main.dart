@@ -3,7 +3,7 @@ import 'package:quizzler/question.dart';
 // import 'question.dart';
 import 'quiz_brain.dart';
 
-QuizBrain quizBrain= QuizBrain();
+QuizBrain quizBrain = QuizBrain();
 void main() => runApp(Quizzler());
 
 class Quizzler extends StatelessWidget {
@@ -38,10 +38,17 @@ class _QuizPageState extends State<QuizPage> {
   // List<bool> answers = [false, true, true];
   // Question q1=Question(q: 'You can lead a cow down stairs but not up stairs.', a: false);
 
-
-
-
-
+  void checkAnswer(bool userPickedAnswer) {
+    bool correctAnswer = quizBrain.getCorrectAnswer(0);
+    if (userPickedAnswer == correctAnswer) {
+      print('user got it right');
+    } else {
+      print('user got it wrong');
+    }
+    setState(() {
+      quizBrain.nextQuestion();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,15 +86,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = quizBrain.getCorrectAnswer(0);
-                if(correctAnswer == true){
-                  print('user got it right');
-                }else{
-                  print('user got it wrong');
-                }
-                setState(() {
-                  quizBrain.nextQuestion();
-                });
+                checkAnswer(true);
 
                 //The user picked true.
               },
@@ -107,15 +106,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = quizBrain.getCorrectAnswer(0);
-                if(correctAnswer == false){
-                  print('user got it right');
-                }else{
-                  print('user got it wrong');
-                }
-                 setState(() {
-                  quizBrain.nextQuestion();
-                });
+                checkAnswer(false);
                 //The user picked false.
               },
             ),
