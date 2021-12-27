@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizzler/question.dart';
+// import 'package:quizzler/question.dart';
 // import 'question.dart';
 import 'quiz_brain.dart';
 
@@ -40,12 +40,19 @@ class _QuizPageState extends State<QuizPage> {
 
   void checkAnswer(bool userPickedAnswer) {
     bool correctAnswer = quizBrain.getCorrectAnswer(0);
+     setState(() {
     if (userPickedAnswer == correctAnswer) {
-      print('user got it right');
+      scoreKeeper.add(Icon(
+        Icons.check,
+        color: Colors.green,
+      ));
     } else {
-      print('user got it wrong');
+        scoreKeeper.add(Icon(
+        Icons.close,
+        color: Colors.red,
+      ));
     }
-    setState(() {
+   
       quizBrain.nextQuestion();
     });
   }
